@@ -1,10 +1,12 @@
-import Hero from '@/src/components/hero'
-import React from 'react'
+import Hero from "@/src/components/hero";
+import React from "react";
 
-const panico = () => {
+const Home = () => {
   return (
-    <div><Hero />;</div>
-  )
-}
+    <div>
+      <Hero />
+    </div>
+  );
+};
 
-export default panico
+export default Home;
