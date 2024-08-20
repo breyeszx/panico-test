@@ -1,4 +1,3 @@
-import Hero from "@/src/components/hero";
 import React from "react";
 import dynamic from "next/dynamic";
 
