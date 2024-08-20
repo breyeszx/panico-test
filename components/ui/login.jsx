@@ -1,25 +1,38 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { EyeIcon, EyeOffIcon, GithubIcon, LockIcon, MailIcon } from 'lucide-react';
+import {
+  EyeIcon,
+  EyeOffIcon,
+  GithubIcon,
+  LockIcon,
+  MailIcon,
+} from "lucide-react";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();  // Correctly using useRouter here
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter(); // Correctly using useRouter here
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (email === 'admin@gmail.com' && password === 'admin123') {
-      router.push('/panico');  // Redirecting to /panico page
+    if (email === "admin@gmail.com" && password === "admin123") {
+      router.push("/panico"); // Redirecting to /panico page
     } else {
       alert("Invalid credentials");
     }
@@ -40,7 +53,7 @@ export default function Login() {
             Continue with GitHub
           </Button>
           <Button variant="outline" className="w-full">
-          <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+            <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -77,14 +90,14 @@ export default function Login() {
             <Label htmlFor="email">Email</Label>
             <div className="relative">
               <MailIcon className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="name@example.com" 
-                className="pl-10" 
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                className="pl-10"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
               />
             </div>
           </div>
@@ -92,13 +105,13 @@ export default function Login() {
             <Label htmlFor="password">Password</Label>
             <div className="relative">
               <LockIcon className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-              <Input 
-                id="password" 
-                type={showPassword ? "text" : "password"} 
-                className="pl-10" 
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className="pl-10"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required 
+                required
               />
               <Button
                 type="button"
@@ -134,7 +147,6 @@ export default function Login() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          Don't have an account?{" "}
           <Button variant="link" className="px-0 font-normal">
             Sign up
           </Button>
