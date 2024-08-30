@@ -60,7 +60,9 @@ export default function PerfilMenu() {
             <TableRow>
               <TableCell>Jacob</TableCell>
               <TableCell>Hermano</TableCell>
-              {/* <TableCell>+56 9 6394 5934</TableCell> */}
+              <TableCell>
+                <IoCall />
+              </TableCell>
               <TableCell>
                 <div className="space-x-3">
                   <Button className="m-3 my-3" variant="destructive" size="sm">

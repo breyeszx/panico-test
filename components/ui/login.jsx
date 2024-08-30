@@ -25,50 +25,49 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); // Correctly using useRouter here
-  const [error, setError] = useState('');
+  const router = useRouter();
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError('');
-  
+    setError("");
+
     const data = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-  
+
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
+      const response = await fetch("/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-  
+
       const result = await response.json(); // Leer respuesta como JSON
-  
+
       if (!response.ok) {
-        throw new Error(result.message || 'Something went wrong');
+        throw new Error(result.message || "Something went wrong");
       }
-  
+
       // Aquí podrías guardar el token en el localStorage o en una cookie
-      alert('Login successful');
-      router.push('/panico'); // Redirigir a una página protegida
+      alert("Login successful");
+      router.push("/perfil"); // Redirigir a una página protegida
     } catch (err) {
       setError(err.message);
     }
   }
 
-
   function handleSignUp(e) {
     e.preventDefault();
     // Aquí puedes agregar lógica de autenticación si es necesario
-    
+
     // Redirige a otra página o componente
-    router.push('/sign_up'); 
+    router.push("/sign_up");
   }
 
   return (
@@ -180,7 +179,11 @@ export default function Login() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          <Button variant="link" className="px-0 font-normal" onClick={handleSignUp}>
+          <Button
+            variant="link"
+            className="px-0 font-normal"
+            onClick={handleSignUp}
+          >
             Sign up
           </Button>
         </p>
