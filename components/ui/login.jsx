@@ -67,19 +67,21 @@ export default function Login() {
     // Aquí puedes agregar lógica de autenticación si es necesario
 
     // Redirige a otra página o componente
-    router.push("/sign_up");
+    router.push("/registro");
   }
 
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">
+          Ingreso
+        </CardTitle>
         <CardDescription className="text-center">
-          Enter your email and password to access your account
+          Ingresa tu email y contraseña para acceder
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <Button variant="outline" className="w-full">
             <GithubIcon className="mr-2 h-4 w-4" />
             Continue with GitHub
@@ -116,7 +118,7 @@ export default function Login() {
               Or continue with
             </span>
           </div>
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -125,7 +127,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="nombre@ejemplo.com"
                 className="pl-10"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -134,13 +136,14 @@ export default function Login() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Contraseña</Label>
             <div className="relative">
               <LockIcon className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 className="pl-10"
+                placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -166,14 +169,14 @@ export default function Login() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Checkbox id="remember" />
-              <Label htmlFor="remember">Remember me</Label>
+              <Label htmlFor="remember">Recuerdame</Label>
             </div>
             <Button variant="link" className="px-0 font-normal">
-              Forgot password?
+              Olvidaste tu contraseña?
             </Button>
           </div>
           <Button type="submit" className="w-full">
-            Sign In
+            Ingresar
           </Button>
         </form>
       </CardContent>
@@ -184,7 +187,7 @@ export default function Login() {
             className="px-0 font-normal"
             onClick={handleSignUp}
           >
-            Sign up
+            Registrate
           </Button>
         </p>
       </CardFooter>

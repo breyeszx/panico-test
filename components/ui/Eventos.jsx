@@ -14,7 +14,7 @@ export default function Eventos() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="max-w-md mx-auto bg-gradient-to-br from-lime-200 to-emerald-300 p-6 rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto bg-gradient-to-br from-teal-400 to-green-400 p-6  shadow-lg">
       {/* <h1 className="text-2xl font-bold text-purple-800 bg-purple-200 rounded-full py-2 px-4 mb-6 inline-block">
         Eventos Cercanos
       </h1> */}

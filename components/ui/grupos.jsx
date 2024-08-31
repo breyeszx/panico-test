@@ -7,9 +7,9 @@ export default function Grupos() {
     { name: "AJEDREZ", icon: <FaChess /> },
     { name: "BINGO", icon: <FaChess /> },
     { name: "LOL", icon: <FaChess /> },
-    { name: "LOL", icon: <FaChess /> },
-    { name: "LOL", icon: <FaChess /> },
-    { name: "LOL", icon: <FaChess /> },
+    { name: "CANDY CRUSH", icon: <FaChess /> },
+    { name: "POOL", icon: <FaChess /> },
+    { name: "CARTAS", icon: <FaChess /> },
   ];
   const [openModal, setOpenModal] = useState(null);
 
