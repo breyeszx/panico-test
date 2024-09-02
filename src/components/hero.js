@@ -41,7 +41,7 @@ export default function Hero() {
           <div className="mt-12 w-full max-w-3xl">
             <h2 className="text-2xl font-bold mb-4">Mapa</h2>
             <MapComponent />
-            <div className="mt-4 flex justify-around">
+            {/* <div className="mt-4 flex justify-around">
               <div className="flex items-center">
                 <div className="w-4 h-4 bg-red-500 rounded-full mr-2" />
                 <span>Hospital</span>
@@ -54,7 +54,7 @@ export default function Hero() {
                 <div className="w-4 h-4 bg-green-500 rounded-full mr-2" />
                 <span>Fire Station</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </>
       )}

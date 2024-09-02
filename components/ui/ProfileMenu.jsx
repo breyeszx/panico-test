@@ -137,7 +137,12 @@ export default function Perfilmenu() {
         throw new Error("Failed to delete emergency contact");
       }
 
-      setUser({ ...user, emergencyContacts: updatedContacts });
+      // Actualiza el estado del usuario con la lista de contactos actualizada
+      setUser((prevUser) => ({
+        ...prevUser,
+        emergencyContacts: updatedContacts,
+      }));
+
       setDeleteConfirmation({ isOpen: false, contactId: null });
     } catch (error) {
       console.error("Error deleting emergency contact:", error);
