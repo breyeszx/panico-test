@@ -2,7 +2,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../auth/auth";
-import { dbConnect } from "../../../lib/mongodb";
+import { dbConnect } from "../../../../lib/mongodb";
 
 export default NextAuth({
   session: {
