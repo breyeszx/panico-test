@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-import { hash } from "bcrypt";
-import Usuario from "/src/models/user";
+// pages/api/register.js
+import dbConnect from "../../../lib/mongodb";
+import User from "../../models/user";
+import { hash } from "bcryptjs";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -14,22 +15,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await dbConnect();
 
-    const existingUser = await Usuario.findOne({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ message: "User already exists" });
     }
 
     const hashedPassword = await hash(password, 10);
 
-    const user = new Usuario({
-      nombre: firstName,
+    const user = new User({
+      name: firstName,
+      lastName,
       email,
-      contraseña: hashedPassword,
+      password: hashedPassword,
     });
 
     await user.save();

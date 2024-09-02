@@ -14,20 +14,20 @@ export default function Navbar() {
         </Button>
       </Link>
 
-      <Link href={"/perfil"}>
-        <Button
-          variant="outline"
-          className="bg-white text-black font-bold rounded-full px-6"
-        >
-          PERFIL
-        </Button>
-      </Link>
       <Link href={"/eventos"}>
         <Button
           variant="disabled"
           className="bg-white text-black font-bold rounded-full px-6"
         >
           EVENTOS
+        </Button>
+      </Link>
+      <Link href={"/perfil"}>
+        <Button
+          variant="outline"
+          className="bg-white text-black font-bold rounded-full px-6"
+        >
+          PERFIL
         </Button>
       </Link>
 

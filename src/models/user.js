@@ -1,29 +1,26 @@
-// lib/models/Usuario.js
+// models/User.js
+import mongoose from "mongoose";
 
-import mongoose from 'mongoose';
-
-const usuarioSchema = new mongoose.Schema({
-  nombre: {
-    type: String,
-    required: true,
-  },
+const UserSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: [true, "Please provide an email"],
     unique: true,
   },
-  contraseña: {
+  password: {
     type: String,
-    required: true,
+    required: [true, "Please provide a password"],
   },
+  name: String,
+  lastName: String,
+  rut: String,
+  emergencyContacts: [
+    {
+      name: String,
+      relation: String,
+      number: String,
+    },
+  ],
 });
 
-let Usuario;
-
-if (mongoose.models.Usuario) {
-  Usuario = mongoose.models.Usuario;
-} else {
-  Usuario = mongoose.model('Usuario', usuarioSchema);
-}
-
-export default Usuario;
+export default mongoose.models.User || mongoose.model("User", UserSchema);

@@ -1,36 +1,40 @@
-// src/pages/api/login.js
-import bcrypt from 'bcrypt';
-import Usuario from '/src/models/user';
-import connectToDatabase from '/lib/mongodb';
+// pages/api/login.js
+import dbConnect from "../../../lib/mongodb";
+import User from "../../models/user";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { email, password } = req.body;
+  if (req.method !== "POST") {
+    return res.status(405).end();
+  }
 
-    try {
-      await connectToDatabase();
+  await dbConnect();
 
-      // Buscar el usuario por email
-      const usuario = await Usuario.findOne({ email });
+  const { email, password } = req.body;
 
-      if (!usuario) {
-        return res.status(401).json({ message: 'User not found' });
-      }
+  try {
+    const user = await User.findOne({ email });
 
-      // Comparar contraseñas
-      const isMatch = await bcrypt.compare(password, usuario.contraseña);
-
-      if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid password' });
-      }
-
-      // Autenticación exitosa
-      res.status(200).json({ message: 'Login successful' });
-    } catch (error) {
-      res.status(500).json({ message: 'Internal server error' });
+    if (!user) {
+      return res.status(400).json({ message: "Usuario no encontrado" });
     }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Contraseña incorrecta" });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({
+      token,
+      user: { id: user._id, email: user.email, name: user.name },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error del servidor" });
   }
 }

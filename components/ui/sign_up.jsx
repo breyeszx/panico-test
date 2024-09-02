@@ -15,11 +15,13 @@ import { AlertCircle } from "lucide-react";
 
 export default function SignUp() {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
     const data = {
       firstName: e.target.firstName.value,
@@ -37,10 +39,7 @@ export default function SignUp() {
         body: JSON.stringify(data),
       });
 
-      const textResponse = await response.text(); // Leer respuesta como texto
-      console.log("Response text:", textResponse); // Imprimir respuesta para depuración
-
-      const result = JSON.parse(textResponse); // Intentar convertir el texto a JSON
+      const result = await response.json();
 
       if (!response.ok) {
         throw new Error(result.message || "Something went wrong");
@@ -50,14 +49,16 @@ export default function SignUp() {
       router.push("/login");
     } catch (err) {
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Regsitro</CardTitle>
-        <CardDescription>Crea tu cuenta para empezar </CardDescription>
+        <CardTitle className="text-2xl font-bold">Registro</CardTitle>
+        <CardDescription>Crea tu cuenta para empezar</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -81,7 +82,7 @@ export default function SignUp() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Contraseña </Label>
+            <Label htmlFor="password">Contraseña</Label>
             <Input
               id="password"
               type="password"
@@ -95,14 +96,14 @@ export default function SignUp() {
               {error}
             </div>
           )}
-          <Button type="submit" className="w-full">
-            Registrar
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Registrando..." : "Registrar"}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="justify-center">
         <p className="text-sm text-muted-foreground">
-          Ya tienes una cuenta?{" "}
+          ¿Ya tienes una cuenta?{" "}
           <Button
             variant="link"
             className="px-0 font-normal"
