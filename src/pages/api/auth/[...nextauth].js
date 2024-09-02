@@ -1,8 +1,8 @@
 // pages/api/auth/[...nextauth].js
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { verifyPassword } from "../../../lib/auth";
-import { connectToDatabase } from "../../../lib/db";
+import { verifyPassword } from "../auth/auth";
+import { dbConnect } from "../../../lib/mongodb";
 
 export default NextAuth({
   session: {
@@ -11,7 +11,7 @@ export default NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const client = await connectToDatabase();
+        const client = await dbConnect();
         const usersCollection = client.db().collection("users");
         const user = await usersCollection.findOne({
           email: credentials.email,
